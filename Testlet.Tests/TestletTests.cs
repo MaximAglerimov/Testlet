@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -8,10 +9,14 @@ namespace Testlet.Tests
     [TestClass]
     public class TestletTests
     {
+        private const int PretestItemsCount = 4;
+        private const int OperationalItemsCount = 6;
+
         [TestMethod]
         public void Randomize_IncompleteItemsListPassedToConstructor_ReturnsError()
         {
-            var items = Enumerable.Repeat(new Item(), 8).ToList();
+            var items = GetItems(pretestItemsCount: 8, operationalItemsCount: 0);
+
             var testlet = new Testlet(testletId: It.IsAny<string>(), items);
 
             Assert.ThrowsException<ArgumentException>(() => testlet.Randomize());
@@ -20,9 +25,7 @@ namespace Testlet.Tests
         [TestMethod]
         public void Randomize_ItemsListPassedToConstructorContainsInvalidOperationalItemsCount_ReturnsError()
         {
-            var pretestItems = Enumerable.Repeat(new Item(), 3).ToList();
-            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 7).ToList();
-            var items = pretestItems.Concat(operationalItems).ToList();
+            var items = GetItems(pretestItemsCount: 3, operationalItemsCount: 7);
 
             var testlet = new Testlet(testletId: It.IsAny<string>(), items);
 
@@ -32,23 +35,17 @@ namespace Testlet.Tests
         [TestMethod]
         public void Randomize_ItemsListPassedToConstructor_Returns10Items()
         {
-            const int itemsCount = 10;
-
-            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
-            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
-            var items = pretestItems.Concat(operationalItems).ToList();
+            var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
-            Assert.AreEqual(itemsCount, actual.Count);
+            Assert.AreEqual(10, actual.Count);
         }
 
         [TestMethod]
         public void Randomize_ItemsListPassedToConstructor_ReturnsFirst2ItemsArePretest()
         {
-            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
-            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
-            var items = pretestItems.Concat(operationalItems).ToList();
+            var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
@@ -58,13 +55,19 @@ namespace Testlet.Tests
         [TestMethod]
         public void Randomize_ItemsListPassedToConstructor_ReturnsLast8ItemsContains6Operational()
         {
-            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
-            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
-            var items = pretestItems.Concat(operationalItems).ToList();
+            var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
-            Assert.AreEqual(6, actual.Skip(2).Count(item => item.ItemType == ItemTypeEnum.Operational));
+            Assert.AreEqual(OperationalItemsCount, actual.Skip(2).Count(item => item.ItemType == ItemTypeEnum.Operational));
+        }
+
+        private static List<Item> GetItems(int pretestItemsCount, int operationalItemsCount)
+        {
+            var pretestItems = Enumerable.Repeat(new Item(), pretestItemsCount).ToList();
+            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, operationalItemsCount).ToList();
+
+            return pretestItems.Concat(operationalItems).ToList();
         }
     }
 }
