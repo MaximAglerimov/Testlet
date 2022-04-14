@@ -6,6 +6,8 @@ namespace Testlet
 {
     public class Testlet
     {
+        private const int ItemsCount = 10;
+
         public string TestletId;
         private readonly List<Item> Items;
 
@@ -17,12 +19,12 @@ namespace Testlet
 
         public List<Item> Randomize()
         {
-            if (Items?.Count != 10)
+            if (Items?.Count != ItemsCount)
             {
                 throw new ArgumentException();
             }
 
-            return Enumerable.Repeat(new Item(), 10).ToList();
+            return Enumerable.Repeat(new Item(), ItemsCount).ToList();
         }
     }
 }
