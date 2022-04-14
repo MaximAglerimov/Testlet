@@ -7,6 +7,7 @@ namespace Testlet
     public class Testlet
     {
         private const int ItemsCount = 10;
+        private const int OperationalItemsCount = 6;
 
         public string TestletId;
         private readonly List<Item> Items;
@@ -19,12 +20,8 @@ namespace Testlet
 
         public List<Item> Randomize()
         {
-            if (Items?.Count != ItemsCount)
-            {
-                throw new ArgumentException();
-            }
-
-            if (Items.Where(item => item.ItemType == ItemTypeEnum.Operational).Count() != 6)
+            if (Items?.Count != ItemsCount ||
+                Items.Where(item => item.ItemType == ItemTypeEnum.Operational).Count() != OperationalItemsCount)
             {
                 throw new ArgumentException();
             }
