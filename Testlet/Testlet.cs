@@ -13,8 +13,6 @@ namespace Testlet
             Items = items;
         }
 
-        public List<Item> Randomize()
-        {
-        }
+        public List<Item> Randomize() => new List<Item>();
     }
 }
