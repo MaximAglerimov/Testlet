@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Testlet
 {
@@ -13,6 +14,14 @@ namespace Testlet
             Items = items;
         }
 
-        public List<Item> Randomize() => new List<Item>();
+        public List<Item> Randomize()
+        {
+            if (Items?.Count != 10)
+            {
+                throw new ArgumentException();
+            }
+
+            return new List<Item>();
+        }
     }
 }
