@@ -24,7 +24,10 @@ namespace Testlet
                 throw new ArgumentException();
             }
 
-            return Enumerable.Repeat(new Item(), ItemsCount).ToList();
+            return new List<Item> {
+                new Item { ItemType = ItemTypeEnum.Operational},
+                new Item { ItemType = ItemTypeEnum.Operational}
+            }.Concat(Enumerable.Repeat(new Item(), 8)).ToList();
         }
     }
 }
