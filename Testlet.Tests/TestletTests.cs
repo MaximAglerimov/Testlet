@@ -16,5 +16,16 @@ namespace Testlet.Tests
 
             Assert.ThrowsException<ArgumentException>(() => testlet.Randomize());
         }
+
+        [TestMethod]
+        public void Randomize_ItemsListPassedToConstructor_Returns10Items()
+        {
+            const int itemsCount = 10;
+
+            var items = Enumerable.Repeat(new Item(), itemsCount).ToList();
+            var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
+
+            Assert.AreEqual(itemsCount, actual.Count);
+        }
     }
 }
