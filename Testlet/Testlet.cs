@@ -26,18 +26,19 @@ namespace Testlet
                 throw new ArgumentException();
             }
 
-            return new List<Item> {
-                new Item { ItemType = ItemTypeEnum.Pretest },
-                new Item { ItemType = ItemTypeEnum.Pretest },
-                new Item { ItemType = ItemTypeEnum.Pretest },
-                new Item { ItemType = ItemTypeEnum.Pretest },
-                new Item { ItemType = ItemTypeEnum.Operational },
-                new Item { ItemType = ItemTypeEnum.Operational },
-                new Item { ItemType = ItemTypeEnum.Operational },
-                new Item { ItemType = ItemTypeEnum.Operational },
-                new Item { ItemType = ItemTypeEnum.Operational },
-                new Item { ItemType = ItemTypeEnum.Operational },
-            };
+            var pretestItems = Items.Where(item => item.ItemType == ItemTypeEnum.Pretest);
+            var operationalItems = Items.Where(item => item.ItemType == ItemTypeEnum.Operational);
+
+            var rnd = new Random();
+            var resultItems = new List<Item>();
+
+            var randomizedPretestItems = pretestItems.OrderBy(item => rnd.Next()).ToList();
+            var rest8Items = randomizedPretestItems.Skip(2).Concat(operationalItems).OrderBy(item => rnd.Next()).ToList();
+
+            resultItems.AddRange(randomizedPretestItems.Take(2));
+            resultItems.AddRange(rest8Items);
+
+            return resultItems;
         }
     }
 }
