@@ -38,5 +38,17 @@ namespace Testlet.Tests
 
             Assert.IsTrue(actual.Take(2).All(item => item.ItemType == ItemTypeEnum.Pretest));
         }
+
+        [TestMethod]
+        public void Randomize_ItemsListPassedToConstructor_ReturnsLast8ItemsContains6Operational()
+        {
+            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
+            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
+            var items = pretestItems.Concat(operationalItems).ToList();
+
+            var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
+
+            Assert.AreEqual(6, actual.Skip(2).Count(item => item.ItemType == ItemTypeEnum.Operational));
+        }
     }
 }
