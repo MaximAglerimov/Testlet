@@ -34,7 +34,10 @@ namespace Testlet.Tests
         {
             const int itemsCount = 10;
 
-            var items = Enumerable.Repeat(new Item(), itemsCount).ToList();
+            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
+            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
+            var items = pretestItems.Concat(operationalItems).ToList();
+
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
             Assert.AreEqual(itemsCount, actual.Count);
@@ -43,9 +46,10 @@ namespace Testlet.Tests
         [TestMethod]
         public void Randomize_ItemsListPassedToConstructor_ReturnsFirst2ItemsArePretest()
         {
-            const int itemsCount = 10;
+            var pretestItems = Enumerable.Repeat(new Item(), 4).ToList();
+            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 6).ToList();
+            var items = pretestItems.Concat(operationalItems).ToList();
 
-            var items = Enumerable.Repeat(new Item(), itemsCount).ToList();
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
             Assert.IsTrue(actual.Take(2).All(item => item.ItemType == ItemTypeEnum.Pretest));

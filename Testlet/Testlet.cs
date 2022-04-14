@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Testlet
 {
@@ -19,6 +20,11 @@ namespace Testlet
         public List<Item> Randomize()
         {
             if (Items?.Count != ItemsCount)
+            {
+                throw new ArgumentException();
+            }
+
+            if (Items.Where(item => item.ItemType == ItemTypeEnum.Operational).Count() != 6)
             {
                 throw new ArgumentException();
             }
