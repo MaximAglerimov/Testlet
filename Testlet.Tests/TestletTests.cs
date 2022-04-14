@@ -18,6 +18,18 @@ namespace Testlet.Tests
         }
 
         [TestMethod]
+        public void Randomize_ItemsListPassedToConstructorContainsInvalidOperationalItemsCount_ReturnsError()
+        {
+            var pretestItems = Enumerable.Repeat(new Item(), 3).ToList();
+            var operationalItems = Enumerable.Repeat(new Item() { ItemType = ItemTypeEnum.Operational }, 7).ToList();
+            var items = pretestItems.Concat(operationalItems).ToList();
+
+            var testlet = new Testlet(testletId: It.IsAny<string>(), items);
+
+            Assert.ThrowsException<ArgumentException>(() => testlet.Randomize());
+        }
+
+        [TestMethod]
         public void Randomize_ItemsListPassedToConstructor_Returns10Items()
         {
             const int itemsCount = 10;
