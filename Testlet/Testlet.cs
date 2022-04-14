@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Testlet
 {
@@ -21,7 +22,7 @@ namespace Testlet
                 throw new ArgumentException();
             }
 
-            return new List<Item>();
+            return Enumerable.Repeat(new Item(), 10).ToList();
         }
     }
 }
