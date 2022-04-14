@@ -25,8 +25,8 @@ namespace Testlet
             }
 
             return new List<Item> {
-                new Item { ItemType = ItemTypeEnum.Operational},
-                new Item { ItemType = ItemTypeEnum.Operational}
+                new Item { ItemType = ItemTypeEnum.Pretest },
+                new Item { ItemType = ItemTypeEnum.Pretest }
             }.Concat(Enumerable.Repeat(new Item(), 8)).ToList();
         }
     }
