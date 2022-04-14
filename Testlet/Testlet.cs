@@ -28,7 +28,7 @@ namespace Testlet
                 new Item { ItemType = ItemTypeEnum.Pretest },
                 new Item { ItemType = ItemTypeEnum.Pretest },
                 new Item { ItemType = ItemTypeEnum.Pretest },
-                new Item { ItemType = ItemTypeEnum.Pretest },
+                new Item { ItemType = ItemTypeEnum.Operational },
                 new Item { ItemType = ItemTypeEnum.Operational },
                 new Item { ItemType = ItemTypeEnum.Operational },
                 new Item { ItemType = ItemTypeEnum.Operational },
