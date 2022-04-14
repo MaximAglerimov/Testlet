@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testlet", "Testlet\Testlet.csproj", "{D73DB069-6CB7-43C2-BD63-4F96D2080E94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testlet.Tests", "Testlet.Tests\Testlet.Tests.csproj", "{AA24E0CE-B6B1-40FF-A2A7-07C856F65BB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D73DB069-6CB7-43C2-BD63-4F96D2080E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73DB069-6CB7-43C2-BD63-4F96D2080E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73DB069-6CB7-43C2-BD63-4F96D2080E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73DB069-6CB7-43C2-BD63-4F96D2080E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA24E0CE-B6B1-40FF-A2A7-07C856F65BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA24E0CE-B6B1-40FF-A2A7-07C856F65BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA24E0CE-B6B1-40FF-A2A7-07C856F65BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA24E0CE-B6B1-40FF-A2A7-07C856F65BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E1B8F60-7270-40CB-BC73-C695C8877541}
+	EndGlobalSection
+EndGlobal
