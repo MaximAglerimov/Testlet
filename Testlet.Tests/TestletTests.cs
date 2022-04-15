@@ -11,6 +11,7 @@ namespace Testlet.Tests
     {
         private const int PretestItemsCount = 4;
         private const int OperationalItemsCount = 6;
+        private const int FirstPretestItemsCount = 2;
 
         [TestMethod]
         public void Randomize_IncompleteItemsListPassedToConstructor_ReturnsError()
@@ -49,7 +50,7 @@ namespace Testlet.Tests
 
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
-            Assert.IsTrue(actual.Take(2).All(item => item.ItemType == ItemTypeEnum.Pretest));
+            Assert.IsTrue(actual.Take(FirstPretestItemsCount).All(item => item.ItemType == ItemTypeEnum.Pretest));
         }
 
         [TestMethod]
@@ -59,7 +60,7 @@ namespace Testlet.Tests
 
             var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
-            Assert.AreEqual(OperationalItemsCount, actual.Skip(2).Count(item => item.ItemType == ItemTypeEnum.Operational));
+            Assert.AreEqual(OperationalItemsCount, actual.Skip(FirstPretestItemsCount).Count(item => item.ItemType == ItemTypeEnum.Operational));
         }
 
         private static List<Item> GetItems(int pretestItemsCount, int operationalItemsCount)
