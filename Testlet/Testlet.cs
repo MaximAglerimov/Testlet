@@ -13,7 +13,7 @@ namespace Testlet
         public string TestletId;
         private readonly List<Item> Items;
 
-        public Testlet(string testletId, List<Item> items)
+        public Testlet(string testletId, List<Item> items, Randomizer randomizer)
         {
             TestletId = testletId;
             Items = items;
