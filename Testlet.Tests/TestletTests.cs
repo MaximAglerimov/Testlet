@@ -18,9 +18,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(pretestItemsCount: 8, operationalItemsCount: 0);
 
-            var testlet = new Testlet(testletId: It.IsAny<string>(), items);
-
-            Assert.ThrowsException<ArgumentException>(() => testlet.Randomize());
+            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items));
         }
 
         [TestMethod]
@@ -28,9 +26,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(pretestItemsCount: 3, operationalItemsCount: 7);
 
-            var testlet = new Testlet(testletId: It.IsAny<string>(), items);
-
-            Assert.ThrowsException<ArgumentException>(() => testlet.Randomize());
+            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items));
         }
 
         [TestMethod]
