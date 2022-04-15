@@ -19,7 +19,7 @@ namespace Testlet.Tests
         public void Setup() => randomizer = new Mock<Randomizer>(null);
 
         [TestMethod]
-        public void Randomize_IncompleteItemsListPassedToConstructor_ReturnsError()
+        public void TestletConstructor_IncompleteItemsListPassedToConstructor_ReturnsError()
         {
             var items = GetItems(pretestItemsCount: 8, operationalItemsCount: 0);
 
@@ -27,7 +27,7 @@ namespace Testlet.Tests
         }
 
         [TestMethod]
-        public void Randomize_ItemsListPassedToConstructorContainsInvalidOperationalItemsCount_ReturnsError()
+        public void TestletConstructor_ItemsListPassedToConstructorContainsInvalidOperationalItemsCount_ReturnsError()
         {
             var items = GetItems(pretestItemsCount: 3, operationalItemsCount: 7);
 
