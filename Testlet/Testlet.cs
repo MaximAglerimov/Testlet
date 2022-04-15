@@ -12,11 +12,13 @@ namespace Testlet
 
         public string TestletId;
         private readonly List<Item> Items;
+        private readonly Randomizer Randomizer;
 
         public Testlet(string testletId, List<Item> items, Randomizer randomizer)
         {
             TestletId = testletId;
             Items = items;
+            Randomizer = randomizer;
 
             if (Items?.Count != ItemsCount ||
                 Items.Where(item => item.ItemType == ItemTypeEnum.Operational).Count() != OperationalItemsCount)
@@ -30,11 +32,10 @@ namespace Testlet
             var pretestItems = Items.Where(item => item.ItemType == ItemTypeEnum.Pretest);
             var operationalItems = Items.Where(item => item.ItemType == ItemTypeEnum.Operational);
 
-            var rnd = new Random();
             var resultItems = new List<Item>();
 
-            var randomizedPretestItems = pretestItems.OrderBy(item => rnd.Next()).ToList();
-            var randomizedRestItems = randomizedPretestItems.Skip(FirstPretestItemsCount).Concat(operationalItems).OrderBy(item => rnd.Next()).ToList();
+            var randomizedPretestItems = pretestItems.OrderBy(item => Randomizer.Next()).ToList();
+            var randomizedRestItems = randomizedPretestItems.Skip(FirstPretestItemsCount).Concat(operationalItems).OrderBy(item => Randomizer.Next()).ToList();
 
             resultItems.AddRange(randomizedPretestItems.Take(FirstPretestItemsCount));
             resultItems.AddRange(randomizedRestItems);

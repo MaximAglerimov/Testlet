@@ -71,11 +71,11 @@ namespace Testlet.Tests
             const int iterationsCount = 10;
 
             var items = GetItems(PretestItemsCount, OperationalItemsCount);
-            var randomizerMock = new Mock<Randomizer>(seed);
             var resultSample = new List<List<Item>>();
 
             for (var i = 0; i < iterationsCount; i++)
             {
+                var randomizerMock = new Mock<Randomizer>(seed);
                 var testlet = new Testlet(testletId: It.IsAny<string>(), items, randomizerMock.Object);
                 resultSample.Add(testlet.Randomize());
             }
