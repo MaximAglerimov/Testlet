@@ -13,17 +13,12 @@ namespace Testlet.Tests
         private const int OperationalItemsCount = 6;
         private const int FirstPretestItemsCount = 2;
 
-        private Mock<Randomizer> randomizer;
-
-        [TestInitialize]
-        public void Setup() => randomizer = new Mock<Randomizer>(null);
-
         [TestMethod]
         public void TestletConstructor_IncompleteItemsListPassedToConstructor_ReturnsError()
         {
             var items = GetItems(pretestItemsCount: 8, operationalItemsCount: 0);
 
-            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items, randomizer.Object));
+            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items));
         }
 
         [TestMethod]
@@ -31,7 +26,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(pretestItemsCount: 3, operationalItemsCount: 7);
 
-            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items, randomizer.Object));
+            Assert.ThrowsException<ArgumentException>(() => new Testlet(testletId: It.IsAny<string>(), items));
         }
 
         [TestMethod]
@@ -39,7 +34,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
-            var actual = new Testlet(testletId: It.IsAny<string>(), items, randomizer.Object).Randomize();
+            var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
             Assert.AreEqual(10, actual.Count);
         }
@@ -49,7 +44,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
-            var actual = new Testlet(testletId: It.IsAny<string>(), items, randomizer.Object).Randomize();
+            var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
             Assert.IsTrue(actual.Take(FirstPretestItemsCount).All(item => item.ItemType == ItemTypeEnum.Pretest));
         }
@@ -59,7 +54,7 @@ namespace Testlet.Tests
         {
             var items = GetItems(PretestItemsCount, OperationalItemsCount);
 
-            var actual = new Testlet(testletId: It.IsAny<string>(), items, randomizer.Object).Randomize();
+            var actual = new Testlet(testletId: It.IsAny<string>(), items).Randomize();
 
             Assert.AreEqual(OperationalItemsCount, actual.Skip(FirstPretestItemsCount).Count(item => item.ItemType == ItemTypeEnum.Operational));
         }

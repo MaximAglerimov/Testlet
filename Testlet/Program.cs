@@ -21,7 +21,7 @@ namespace Testlet
                 new Item { ItemId = "10", ItemType = ItemTypeEnum.Operational }
             };
 
-            var randomizedItems = new Testlet("1", items, new Randomizer()).Randomize();
+            var randomizedItems = new Testlet("1", items).Randomize();
 
             foreach (var item in randomizedItems)
             {

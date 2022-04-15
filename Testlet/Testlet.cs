@@ -14,11 +14,11 @@ namespace Testlet
         private readonly List<Item> Items;
         private readonly Randomizer Randomizer;
 
-        public Testlet(string testletId, List<Item> items, Randomizer randomizer)
+        public Testlet(string testletId, List<Item> items, Randomizer randomizer = null)
         {
             TestletId = testletId;
             Items = items;
-            Randomizer = randomizer;
+            Randomizer = randomizer ?? new Randomizer();
 
             if (Items?.Count != ItemsCount ||
                 Items.Where(item => item.ItemType == ItemTypeEnum.Operational).Count() != OperationalItemsCount)
